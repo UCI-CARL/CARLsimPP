@@ -62,7 +62,7 @@ Clone the CARLsim++ repository to your local disk.
  
 ```
 cd /d C:\
-git clone https://github.com/UCI-CARL/CARLsim-Superbuild.git carlsimpp-t01
+git clone https://github.com/UCI-CARL/CARLsimPP.git carlsimpp-t01
 ``` 
 
 The directory of the local CARLsim++ superbuild repository will be referred as CARLSIMPP_ROOT.
@@ -76,7 +76,7 @@ The directory of the local CARLsim++ superbuild repository will be referred as C
 You also can use an dedicated directory that can used as CARLSIMPP_ROOT.
  
 ``` 
-git clone -b TAG https://github.com/UCI-CARL/CARLsim-Superbuild.git carlsim-001
+git clone -b TAG https://github.com/UCI-CARL/CARLsimPP.git carlsim-001
 ``` 
 
 
