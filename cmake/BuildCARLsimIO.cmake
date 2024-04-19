@@ -20,8 +20,7 @@ endif()
 ycm_ep_helper(CARLsimIO  TYPE GIT 
                          STYLE GITHUB
                          REPOSITORY UCI-CARL/CARLsimIO.git
-                         #TAG master 
-						 TAG main
+                         TAG master 
                          COMPONENT Core
                          FOLDER src
                          DEPENDS Boost CARLcpp ${_depends}
