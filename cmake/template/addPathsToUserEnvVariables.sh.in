@@ -1,0 +1,74 @@
+# Automatically generated addPathsToUserEnvVariables.ps1 file for @PROJECT_NAME@
+
+#Set-ValueToUserEnvVariable CARLSIMPP_SUPERBUILD_SOURCE_DIR "@PROJECT_SOURCE_DIR_NATIVE_PATH@";
+export CARLSIMPP_SUPERBUILD_SOURCE_DIR=@PROJECT_SOURCE_DIR_NATIVE_PATH@
+
+export CARLSIMPP_SUPERBUILD_INSTALL_PREFIX="@YCM_EP_INSTALL_DIR_NATIVE_PATH@"
+
+#Set-ValueToUserEnvVariable CARLSIMPP_SUPERBUILD_INSTALL_PREFIX $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX;
+export CARLSIMPP_SUPERBUILD_INSTALL_PREFIX="@YCM_EP_INSTALL_DIR_NATIVE_PATH@"
+
+#export CARLSIMPP_DIR="@YCM_EP_INSTALL_DIR_NATIVE_PATH@"
+
+#TODO if debug
+
+
+# Extend path
+#Add-ValueToUserEnvVariable PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\bin";
+export PATH=$PATH:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/bin"
+
+# Set and extend .so load path 
+#Add-ValueToUserEnvVariable PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\lib";
+#Add-ValueToUserEnvVariable PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\lib\yarp";
+# replaced by carlsimpp.conf
+#export LD_LIBRARY_PATH=$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/lib"
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/lib/yarp"
+
+
+# YARP related env variables (see http://www.yarp.it/yarp_data_dirs.html )
+#Add-ValueToUserEnvVariable YARP_DATA_DIRS $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\share\yarp";
+#export YARP_DATA_DIRS=$YARP_DATA_DIRS:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/share/yarp"
+export YARP_DATA_DIRS=$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/share/yarp"
+# Fix for application manager
+export YARP_DATA_DIRS=$YARP_DATA_DIRS:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/config/yarp"
+
+# Extend CMAKE_PREFIX_PATH (see https://cmake.org/cmake/help/v3.8/variable/CMAKE_PREFIX_PATH.html )
+#Add-ValueToUserEnvVariable CMAKE_PREFIX_PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX;
+#export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX
+export CMAKE_PREFIX_PATH=$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX
+
+## Setup the path of blockfactory plugins
+#Add-ValueToUserEnvVariable BLOCKFACTORY_PLUGIN_PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\@BLOCKFACTORY_PLUGIN_PATH_DIRECTORY@\blockfactory";
+
+#@cmakeif CARLSIMPP_ENABLE_ROBOT_TESTING
+## CARLSIMPP_ENABLE_ROBOT_TESTING-specific lines
+#Add-ValueToUserEnvVariable PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\lib\robottestingframework";
+#Add-ValueToUserEnvVariable YARP_DATA_DIRS "@PROJECT_SOURCE_DIR_NATIVE_PATH@\robotology\icub-tests\suites";
+#Add-ValueToUserEnvVariable BLOCKTEST_RESOURCE_PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\bin";
+# LN20210613 Enhance Plugin Loader to operate on an insulated path only
+# see DllPluginLoader_impl.h in .\RobotTestingFramework\src\plugins\dll\include\robottestingframework\dll\impl
+#Add-ValueToUserEnvVariable RTF3_PLUGIN_PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\tests\plugins";
+export RTF3_PLUGIN_PATH=$RTF3_PLUGIN_PATH:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/tests/plugins"
+#Add-ValueToUserEnvVariable RTF3_SUITES_PATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\tests\suites";
+export RTF3_SUITES_PATH=$RTF3_SUITES_PATH:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/tests/suites"
+#@endcmakeif CARLSIMPP_ENABLE_ROBOT_TESTING
+
+@cmakeif CARLSIMPP_USES_PYTHON
+# Add the python bindings directory to the PYTHON_PATH
+# LN2021 https://docs.python.org/3/using/cmdline.html#environment-variables
+#Add-ValueToUserEnvVariable PYTHONPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\lib\@PYTHON_VERSION_PATH@\dist-packages";
+#Add-ValueToUserEnvVariable PYTHONPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\lib\@PYTHON_VERSION_PATH@\site-packages";
+# simplify path, debug: by preference, see set-debug.ps
+#Add-ValueToUserEnvVariable PYTHONPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\lib\site-packages";
+#export PYTHONPATH=$PYTHONPATH:$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/lib/site-packages"
+export PYTHONPATH=$CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"/lib/site-packages"
+@endcmakeif CARLSIMPP_USES_PYTHON
+
+#@cmakeif CARLSIMPP_USES_MATLAB
+#Add-ValueToUserEnvVariable MATLABPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\mex";
+#Add-ValueToUserEnvVariable MATLABPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\mex\+wbc\simulink";
+#Add-ValueToUserEnvVariable MATLABPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\share\WBToolbox";
+#Add-ValueToUserEnvVariable MATLABPATH $CARLSIMPP_SUPERBUILD_INSTALL_PREFIX"\share\WBToolbox\images";
+#@endcmakeif CARLSIMPP_USES_MATLAB
+
+

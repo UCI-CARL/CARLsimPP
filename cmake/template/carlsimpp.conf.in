@@ -1,0 +1,9 @@
+# Add .so search path for CARLsim++ so it is consistent in all contexts.
+# Usage:
+#   sudo cp carlsimpp.conf /etc/ld.so.conf.d
+#   ldconfig
+# Hints:
+#   LD_LIBRARY_PATH is restricted on Linux an cannot be used in profile.
+#   There can only one configuration active.
+@YCM_EP_INSTALL_DIR_NATIVE_PATH@/lib
+@YCM_EP_INSTALL_DIR_NATIVE_PATH@/lib/yarp
