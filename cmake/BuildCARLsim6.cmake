@@ -26,7 +26,7 @@ ycm_ep_helper(CARLsim6 TYPE GIT
 			  COMPONENT SNN 
 			  FOLDER src
         DEPENDS ${_DEPENDS}
-        CMAKE_ARGS -DCARLSIM_NO_CUDA:BOOL=(NOT ${CARLSIMPP_USES_CUDA})
+        CMAKE_ARGS -DCARLSIM_NO_CUDA:BOOL=ON  # (NOT ${CARLSIMPP_USES_CUDA})
                    -DCARLSIM_PYCARL:BOOL=${CARLSIMPP_USES_PYTHON}   
                    -DCARLSIM_LN_EXT:BOOL=ON    # see carlsim_conf.h
                    -DCARLSIM_LN_FIRING:BOOL=ON    

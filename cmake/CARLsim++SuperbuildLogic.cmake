@@ -25,7 +25,7 @@ if(CARLSIMPP_ENABLE_CORE)
 		find_or_build_package(CARLcpp)
 		find_or_build_package(YarpLibCarl)
 		if(CARLSIMPP_ENABLE_EDGE)
-			find_or_build_package(YarpDevCarlWb)
+			#find_or_build_package(YarpDevCarlWb)    # Webots does not support aarch64
 			find_or_build_package(YarpDevCarlEpuck2)
 		endif()
 		find_or_build_package(CARLsimIO)

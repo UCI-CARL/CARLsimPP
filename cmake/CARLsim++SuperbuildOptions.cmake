@@ -15,9 +15,10 @@ option(CARLSIMPP_USES_OCTAVE "Enable compilation of software that depend on Octa
 find_package(Python3 COMPONENTS Interpreter )  # define minimal version   VERSION MINIMUM 3.7
 set(PYTHON_VERSION_PATH "python${Python_VERSION_MAJOR}")
 
+# TODO defaults for Linux PI 5
 option(CARLSIMPP_USES_PYTHON "x" TRUE)
-option(CARLSIMPP_USES_MYSQL "x" FALSE)
-option(CARLSIMPP_USES_CUDA "x" TRUE)
+option(CARLSIMPP_USES_MYSQL "x" TRUE)
+option(CARLSIMPP_USES_CUDA "x" FALSE)
 option(CARLSIMPP_USES_QT "x" TRUE)
 option(CARLSIMPP_USES_CARLSIM "x" TRUE)
 option(CARLSIMPP_USES_YARP "x" TRUE)
@@ -29,7 +30,7 @@ option(CARLSIMPP_ENABLE_SERVICE "Enable compilation of service libraries." TRUE)
 option(CARLSIMPP_ENABLE_TESTING "Enable testing." TRUE)
 option(CARLSIMPP_ENABLE_SNN "Enable SNN tier" TRUE)
 option(CARLSIMPP_ENABLE_EDGE "Enable EDGE tier" TRUE)
-option(CARLSIMPP_ENABLE_GPU "Enable GPU tier" TRUE)
+option(CARLSIMPP_ENABLE_GPU "Enable GPU tier" FALSE)
 option(CARLSIMPP_ENABLE_YARP "Enable YARP tier" TRUE)     
 
 # set DEVEL mode for project in WIP to avoid overwrite changes during customizing

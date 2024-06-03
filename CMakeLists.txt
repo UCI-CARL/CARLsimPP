@@ -27,9 +27,9 @@ include(FindOrBuildPackage)
 include(YCMEPHelper)
 
 # preliminary libraries
-find_package(Boost 1.75 REQUIRED)
+find_package(Boost 1.74 REQUIRED)
 find_package(ACE 6.5.12 REQUIRED)
-find_package(QT5 5.15.2 REQUIRED)
+#find_package(QT5 5.15.2 REQUIRED)
 find_package(SWIG 4.0.2 REQUIRED)
 
 # optional prebuild
@@ -73,14 +73,22 @@ endif()
 include(ConfigureFileWithCMakeIf)
 configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/setup.sh.in ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/setup.sh @ONLY)
 
+file(TO_NATIVE_PATH ${PROJECT_SOURCE_DIR} PROJECT_SOURCE_DIR_NATIVE_PATH)
+file(TO_NATIVE_PATH ${YCM_EP_INSTALL_DIR} YCM_EP_INSTALL_DIR_NATIVE_PATH)
 if(WIN32)
-  file(TO_NATIVE_PATH ${PROJECT_SOURCE_DIR} PROJECT_SOURCE_DIR_NATIVE_PATH)
-  file(TO_NATIVE_PATH ${YCM_EP_INSTALL_DIR} YCM_EP_INSTALL_DIR_NATIVE_PATH)
-  configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/setup.bat.in ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/setup.bat @ONLY)
+  configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/setup.bat.in 
+                              ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/setup.bat @ONLY)
   configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/addPathsToUserEnvVariables.ps1.in
                               ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/addPathsToUserEnvVariables.ps1 @ONLY)
   configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/removePathsFromUserEnvVariables.ps1.in
                               ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/removePathsFromUserEnvVariables.ps1 @ONLY)
+else()
+  configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/setup.sh.in 
+                              ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/setup.sh @ONLY)
+  configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/carlsimpp.conf.in
+                              ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/carlsimpp.conf @ONLY)
+  configure_file_with_cmakeif(${CMAKE_CURRENT_SOURCE_DIR}/cmake/template/addPathsToUserEnvVariables.sh.in
+                              ${YCM_EP_INSTALL_DIR}/share/${PROJECT_NAME}/addPathsToUserEnvVariables.sh @ONLY)                              
 endif()
 
 ycm_write_dot_file(${CMAKE_CURRENT_BINARY_DIR}/carlsimpp-superbuild.dot)
