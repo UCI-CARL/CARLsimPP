@@ -7,6 +7,7 @@ ycm_ep_helper(CARLsimGUI TYPE GIT
     STYLE GITHUB
     REPOSITORY UCI-CARL/CARLsimGUI.git
     #TAG master
+    TAG feat/raspi5
     COMPONENT SNN
     FOLDER src
     DEPENDS QT5 CARLsimIO
