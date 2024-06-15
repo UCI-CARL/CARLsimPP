@@ -18,7 +18,7 @@ if(${CARLSIMPP_USES_OCTAVE})
   list(APPEND _DEPENDS Octave)
 endif()
 
-
+if(${CMAKE_HOST_WIN32})	
 ycm_ep_helper(CARLsim6 TYPE GIT 
 			  STYLE GITHUB
 			  REPOSITORY UCI-CARL/CARLsim6.git		  
@@ -41,6 +41,23 @@ ycm_ep_helper(CARLsim6 TYPE GIT
 					-DCMAKE_C_FLAGS_DEBUG:STRING=/MDd /Zi /Ob0 /Od /RTC1
 					-DCMAKE_C_FLAGS_RELEASE:STRING=/MD /O2 /Ob2 /DNDEBUG
                    ${YARP_OPTIONAL_CMAKE_ARGS})	
-                   
-                   
+elseif(${CMAKE_HOST_UNIX}) 
+ycm_ep_helper(CARLsim6 TYPE GIT 
+			  STYLE GITHUB
+			  REPOSITORY UCI-CARL/CARLsim6.git		  
+        #TAG development
+			  COMPONENT SNN 
+			  FOLDER src
+        DEPENDS ${_DEPENDS}
+		
+        CMAKE_ARGS -DCARLSIM_NO_CUDA:BOOL=$<NOT:$<BOOL:${CARLSIMPP_USES_CUDA}>>   # https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#logical-operators
+                   -DCARLSIM_PYCARL:BOOL=${CARLSIMPP_USES_PYTHON}   
+                   -DCARLSIM_LN_EXT:BOOL=ON    # see carlsim_conf.h
+                   -DCARLSIM_LN_FIRING:BOOL=ON    
+                   -DCARLSIM_LN_FIX_DA_DECAY:BOOL=TRUE    
+                   -DCARLSIM_LN_GPU_INFO=$<NOT:$<BOOL:${CARLSIMPP_USES_CUDA}>>    
+                   -DCARLSIM_CUDA_SAMPLES_INCLUDE_DIR:PATH=$<IF:$<BOOL:${CARLSIMPP_USES_CUDA}>,${CMAKE_CURRENT_SOURCE_DIR}/src/CudaSamples/Common,>
+		   #-DCMAKE_CONFIGURATION_TYPES:STRING=Debug;Release
+                   ${YARP_OPTIONAL_CMAKE_ARGS})	
+endif()                                     
 #-DCMAKE_INSTALL_BINDIR:PATH=$<$<CONFIG:Debug$<ANGLE-R>:debug/$<ANGLE-R>bin                    
