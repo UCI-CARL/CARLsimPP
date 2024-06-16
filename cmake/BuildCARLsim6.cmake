@@ -19,12 +19,12 @@ if(${CARLSIMPP_USES_OCTAVE})
 endif()
 
 if(${CMAKE_HOST_WIN32})	
-ycm_ep_helper(CARLsim6 TYPE GIT 
-			  STYLE GITHUB
-			  REPOSITORY UCI-CARL/CARLsim6.git		  
-        #TAG development
-			  COMPONENT SNN 
-			  FOLDER src
+ycm_ep_helper(CARLsim6	TYPE GIT 
+			STYLE GITHUB
+			REPOSITORY UCI-CARL/CARLsim6.git		  
+        		#TAG master 
+			COMPONENT SNN 
+			FOLDER src
         DEPENDS ${_DEPENDS}
         CMAKE_ARGS -DCARLSIM_NO_CUDA:BOOL=ON  # (NOT ${CARLSIMPP_USES_CUDA})
                    -DCARLSIM_PYCARL:BOOL=${CARLSIMPP_USES_PYTHON}   
@@ -45,7 +45,7 @@ elseif(${CMAKE_HOST_UNIX})
 ycm_ep_helper(CARLsim6 TYPE GIT 
 			  STYLE GITHUB
 			  REPOSITORY UCI-CARL/CARLsim6.git		  
-        #TAG development
+        		  TAG feat/NoCudaTimer
 			  COMPONENT SNN 
 			  FOLDER src
         DEPENDS ${_DEPENDS}
