@@ -13,7 +13,7 @@ CARLsim++ for Raspberry Pi OS is built with the following tool chain:
 * Eclipse for C/C++ Embedded Developers  2024-03 
 * CMake GUI 3.25
 * Python 3.11
-* Swig 4.0.2  
+* Swig 4.0.2
 
 ```
 sudo apt-get install cmake-gui
@@ -182,7 +182,7 @@ Aborted
 Build and install all components. 
 ```
 cd ~/carlsimpp-t01/build
-cmake --build . --config Debug
+cmake --build . --config Debug -j 4
 ```
 
 
